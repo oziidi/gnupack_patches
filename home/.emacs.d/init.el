@@ -555,9 +555,17 @@
 (setq delete-old-versions t)  ;; バックアップファイル削除の実行有無
 
 ;; ファイルオープン時のバックアップ（~）の格納ディレクトリ
+;; oz20240329a: Change emacs backup & auto-save directories
+;; ORG START "oz20240329a"
+;; (setq backup-directory-alist
+;;       (cons (cons "\\.*$" (expand-file-name "/tmp/emacsbk"))
+;;             backup-directory-alist))
+;; ORG END   "oz20240329a"
+;; CHG START "oz20240329a"
 (setq backup-directory-alist
-      (cons (cons "\\.*$" (expand-file-name "/tmp/emacsbk"))
+      (cons (cons "\\.*$" (expand-file-name "~/.emacs.d/backup"))
             backup-directory-alist))
+;; CHG END   "oz20240329a"
 
 ;; 編集中ファイルの自動バックアップ（有効：t、無効：nil）
 (setq backup-inhibited nil)
@@ -576,8 +584,15 @@
 (setq auto-save-interval 100)
 
 ;; 編集中ファイル（##）の格納ディレクトリ
+;; oz20240329a: Change emacs backup & auto-save directories
+;; ORG START "oz20240329a"
+;; (setq auto-save-file-name-transforms
+;;       `((".*" ,(expand-file-name "/tmp/emacsbk") t)))
+;; ORG END   "oz20240329a"
+;; CHG START "oz20240329a"
 (setq auto-save-file-name-transforms
-      `((".*" ,(expand-file-name "/tmp/emacsbk") t)))
+      `((".*" ,(expand-file-name "~/.emacs.d/auto-save/") t)))
+;; CHG END   "oz20240329a"
 
 
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
