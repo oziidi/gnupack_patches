@@ -92,6 +92,7 @@ gnupack allows Windows OS users to use cygwin and emacs in a ready-to-use manner
     - markdown-mode
     - moccur (color-moccur & moccur-edit)
     - redo+
+    - restart-emacs
     - text-adjust
     - xcscope
 
@@ -115,6 +116,7 @@ gnupack allows Windows OS users to use cygwin and emacs in a ready-to-use manner
     | C-? | redo |
     | C-: | toggle-truncate-lines |
     | C-; | auto-fill-mode |
+    | C-^ | flymake-mode |
     | M-g | goto-line |
     | M-n | flymake-goto-next-error |
     | M-p | flymake-goto-prev-error |
@@ -203,9 +205,11 @@ gnupack allows Windows OS users to use cygwin and emacs in a ready-to-use manner
       | gtags | gnupack_patches\home\vimfiles\gtags.vim |
       | QFixHowm |  gnupack_patches\app\vim\plugins\qfixapp\ |
 
+<br>
 
 ## Link
 
+[gnupack](https://ja.osdn.net/projects/gnupack/)  
 [apt-cyg](https://github.com/kou1okada/apt-cyg)  
 [vim-csutil](https://github.com/anyakichi/vim-csutil)  
 [vim-qfutil](https://github.com/anyakichi/vim-qfutil|)  
@@ -228,6 +232,8 @@ gnupack allows Windows OS users to use cygwin and emacs in a ready-to-use manner
 [Fira Code](https://github.com/tonsky/FiraCode)  
 [IPAフォント](https://moji.or.jp/ipafont/ipafontdownload/)  
 [GNU Aspell 0.50 (Win32 version)](http://aspell.net/win32/)  
+[pandoc](https://github.com/jgm/pandoc/releases/tag/3.1.12.3)  
+[restart-emacs](https://github.com/iqbalansari/restart-emacs)  
 
 <br>
 <br>
