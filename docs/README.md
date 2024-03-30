@@ -30,12 +30,12 @@ gnupack allows Windows OS users to use cygwin and emacs in a ready-to-use manner
         |
   ```
 
-* C:\gnupack\fetch_gnupack_pretest_devel_2017-09-11.batを実行。  
+* C:\gnupack\fetch_gnupack.batを実行。  
   ダブルクリック or cmd.exeからの実行どちらでも可。  
   gnupack-pretest_devel-2017.11.19/から必要なファイルをgnupack/に取り込んでくれる。
 
 * cygwinの取り込みは下記どちらかの方法で対応。
-  1. C:\gnupack\fetch_gnupack_pretest_devel_2017-09-11.batの下記のコメントアウトを解除してフェッチを実行
+  1. C:\gnupack\fetch_gnupack.batの下記のコメントアウトを解除してフェッチを実行
 
      ```
      rem echo Fetch app\cygwin
