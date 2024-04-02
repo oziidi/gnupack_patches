@@ -1,6 +1,6 @@
 @echo off
 
-set dir_src=..\gnupack-pretest_devel-2017.11.19\
+set dir_src=..\gnupack-pretest_devel-2017.09.11\
 set dir_dst=.\
 set xcpyopt=/s /y /d /i /q
 set cpyopt=/b /v /y
