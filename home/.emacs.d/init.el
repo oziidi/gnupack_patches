@@ -17,19 +17,13 @@
 ;; Software Foundation, Inc., 59 Temple Place - Suite 330, Boston,
 ;; MA 02111-1307, USA.
 
-;;; Commentary:
-
 ;;; Code:
 
-;; oz20240127b: Change garbage collection setting
-;; ADD START "oz20240127b"
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
 ;;; @ Performance Tuning                                            ;;;
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
 
-;; Apply garbage collection at reaching 256MB
 (setq gc-cons-threshold 268435456)
-;; ADD END   "oz20240127b"
 
 
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
@@ -103,39 +97,9 @@
 ;;; @ language - fontset                                            ;;;
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
 
-;; oz20240104a: Update font settings to be compatible with emacs 27.1 and later versions.
-;; oz20231227a: Use both Japanese & English fonts.
-;; ORG START "oz20231227a"
-;; ;; デフォルト フォント
-;; ;; (set-face-attribute 'default nil :family "Migu 1M" :height 110)
-;; (set-face-font 'default "Migu 1M-11:antialias=standard")
-
-;; ;; プロポーショナル フォント
-;; ;; (set-face-attribute 'variable-pitch nil :family "Migu 1M" :height 110)
-;; (set-face-font 'variable-pitch "Migu 1M-11:antialias=standard")
-
-;; ;; 等幅フォント
-;; ;; (set-face-attribute 'fixed-pitch nil :family "Migu 1M" :height 110)
-;; (set-face-font 'fixed-pitch "Migu 1M-11:antialias=standard")
-
-;; ;; ツールチップ表示フォント
-;; ;; (set-face-attribute 'tooltip nil :family "Migu 1M" :height 90)
-;; (set-face-font 'tooltip "Migu 1M-9:antialias=standard")
-;; ORG END
-;; CHG START "oz20231227a"
-;; ORG START "oz20240104a"
-;; Set default font
-;; ;; (set-default-font "Inconsolata-12")
-;; (set-default-font "Fira Code-10")
-;; (set-fontset-font (frame-parameter nil 'font) 'japanese-jisx0208
-;;                   '("IPAexGothic" . "unicode-bmp"))
-;; ORG END   "oz20240104a"
-;; CHG START "oz20240104a"
 ;; Set the default font
 (set-face-attribute 'default nil :family "Fira Code" :height 110)
 
-;; oz20240127c: Add font settings
-;; ADD START "oz20240127c"
 ;; Set variable-pitch (proportional) font
 (set-face-attribute 'variable-pitch nil :family "Arial" :height 110)
 
@@ -144,16 +108,12 @@
 
 ;; Set tooltip font
 (set-face-font 'tooltip "Arial-9:antialias=standard")
-;; ADD END   "oz20240127c"
 
 ;; Set a font for characters other than ASCII ones
 (set-fontset-font nil '(#x80 . #x10ffff) (font-spec :family "IPAexGothic" :registry "unicode-bmp" :lang 'ja))
 
 ;; Not to use the default font for symbols
 (setq use-default-font-for-symbols nil)
-;; CHG END   "oz20240104a"
-;; CHG END   "oz20231227a"
-
 
 ;;; fontset
 
@@ -260,15 +220,8 @@
 ;;; @ screen - buffer                                               ;;;
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
 
-;; oz20231227b: Enable truncate long line by default.
-;;              https://www.emacswiki.org/emacs/TruncateLines
-;; ORG START
-;; ;; バッファ画面外文字の切り詰め表示（有効：t、無効：nil）
-;; (setq truncate-lines nil)
-;; ORG END
-;; CHG START
+;; バッファ画面外文字の切り詰め表示（有効：t、無効：nil）
 (set-default 'truncate-lines t)
-;; CHG END
 
 ;; ウィンドウ縦分割時のバッファ画面外文字の切り詰め表示（有効：t、無効：nil）
 (setq truncate-partial-width-windows nil)
@@ -279,27 +232,16 @@
 (setq uniquify-buffer-name-style 'post-forward-angle-brackets)
 (setq uniquify-ignore-buffers-re "*[^*]+*")
 
-;; oz20231227c: Do not display newline symbol at wrapping text.
-;; ADD START
+;; Do not display newline symbol at wrapping text.
 (setf (cdr (assq 'continuation fringe-indicator-alist))
       '(nil nil) ;; no continuation indicators
       ;; '(nil right-curly-arrow) ;; right indicator only
       ;; '(left-curly-arrow nil) ;; left indicator only
       ;; '(left-curly-arrow right-curly-arrow) ;; default
       )
-;; ADD END
 
-;; oz20231227d: Change line wrap with a key bind
-;; ADD START "oz20231227d"
-;; oz20240113a: Change keybind of toggle-truncate-lines
-;;              to use the default func binded with "C-l".
-;; ORG START "oz20240113a"
-;; (define-key global-map (kbd "C-l") 'toggle-truncate-lines)
-;; ORG END   "oz20240113a"
-;; CHG START "oz20240113a"
+;; Change line wrap with a key bind
 (define-key global-map (kbd "C-:") 'toggle-truncate-lines)
-;; CHG END   "oz20240113a"
-;; ADD END   "oz20231227d"
 
 
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
@@ -422,15 +364,8 @@
 (setq tabbar-separator '(1.0))
 
 ;; タブ切り替え
-;; oz20231227e: Change keybinds to switch tabs.
-;; ORG START
-;; (global-set-key (kbd "<C-tab>") 'tabbar-forward-tab)
-;; (global-set-key (kbd "C-q")     'tabbar-backward-tab)
-;; ORG END
-;; CHG START
 (global-set-key (kbd "C-.") 'tabbar-forward-tab)
 (global-set-key (kbd "C-,") 'tabbar-backward-tab)
-;; CHG END
 
 
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
@@ -484,11 +419,8 @@
 ;; hiwin-modeを有効化
 (hiwin-activate)
 
-;; oz20240119a: Tune hiwin color to paint an inactive buffer
-;; ADD START "oz20240119a"
-;; busybee
+;; Tune hiwin color to paint an inactive buffer
 (set-face-background 'hiwin-face "#282828")
-;; ADD END   "oz20240119a"
 
 
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
@@ -496,29 +428,6 @@
 ;;;   https://github.com/emacs-jp/migemo                            ;;;
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
 
-;; oz20240202a: Optimize emacs startup
-;; ORG START "oz20240202a"
-;; (require 'migemo)
-
-;; (defvar migemo-command nil)
-;; (setq migemo-command "cmigemo")
-
-;; (defvar migemo-options nil)
-;; (setq migemo-options '("-q" "--emacs"))
-
-;; (defvar migemo-dictionary nil)
-;; (setq migemo-dictionary "/usr/local/share/migemo/utf-8/migemo-dict")
-
-;; (defvar migemo-user-dictionary nil)
-
-;; (defvar migemo-regex-dictionary nil)
-
-;; (defvar migemo-coding-system nil)
-;; (setq migemo-coding-system 'utf-8-unix)
-
-;; (load-library "migemo")
-;; ORG END   "oz20240202a"
-;; CHG START "oz20240202a"
 (autoload 'migemo-init "migemo" nil t)
 
 (with-eval-after-load 'migemo
@@ -540,7 +449,6 @@
 )
 
 (add-hook 'emacs-startup-hook 'migemo-init)
-;; CHG END   "oz20240202a"
 
 
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
@@ -584,15 +492,8 @@
 (setq auto-save-interval 100)
 
 ;; 編集中ファイル（##）の格納ディレクトリ
-;; oz20240329a: Change emacs backup & auto-save directories
-;; ORG START "oz20240329a"
-;; (setq auto-save-file-name-transforms
-;;       `((".*" ,(expand-file-name "/tmp/emacsbk") t)))
-;; ORG END   "oz20240329a"
-;; CHG START "oz20240329a"
 (setq auto-save-file-name-transforms
       `((".*" ,(expand-file-name "~/.emacs.d/auto-save/") t)))
-;; CHG END   "oz20240329a"
 
 
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
@@ -667,19 +568,6 @@
 ;;; @ shell                                                         ;;;
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
 
-;; oz20240202a: Optimize emacs startup
-;; ORG START "oz20240202a"
-;; (require 'shell)
-;; (setq explicit-shell-file-name "bash.exe")
-;; (setq shell-command-switch "-c")
-;; (setq shell-file-name "bash.exe")
-;; ;; (setq explicit-bash.exe-args '("--login" "-i"))
-
-;; ;; (M-! and M-| and compile.el)
-;; (setq shell-file-name "bash.exe")
-;; (modify-coding-system-alist 'process ".*sh\\.exe" 'utf-8)
-;; ORG END   "oz20240202a"
-;; CHG START "oz20240202a"
 (autoload 'shell "shell" nil t)
 (with-eval-after-load 'shell
   (setq explicit-shell-file-name "bash.exe")
@@ -687,7 +575,6 @@
   (setq shell-file-name "bash.exe")
   (modify-coding-system-alist 'process ".*sh\\.exe" 'utf-8)
   )
-;; CHG END   "oz20240202a"
 
 
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
@@ -718,24 +605,19 @@
 ;; (load-theme 'solarized-dark t)
 ;; (load-theme 'gnupack-dark t)
 
-;; oz20231227f: Add themes
-;; ADD START
 ;; (load-theme 'emacs-21 t)
 ;; (load-theme 'dark-laptop t)
 ;; (load-theme 'badwolf t)
 (load-theme 'busybee t)
 ;; (load-theme 'high-contrast t)
-;; ADD END
 
-;; oz20231227g: Tune colors on the mode line for busybee
-;; ADD START
+;; Tune colors on the mode line for busybee
 (set-face-foreground 'mode-line "gray30")
 (set-face-background 'mode-line "gray85")
 (set-face-foreground 'mode-line-inactive "gray30")
 (set-face-background 'mode-line-inactive "gray85")
 (set-face-foreground 'mode-line-buffer-id "gray30")
 (set-face-background 'mode-line-buffer-id "gray85")
-;; ADD END
 
 
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
@@ -751,26 +633,10 @@
 ;; )
 
 
-;; oz20231227h: Add extensions
-;; ADD START
-
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
 ;;; @ aspell                                                        ;;;
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
 
-;; oz20240202a: Optimize emacs startup
-;; ORG START "oz20240202a"
-;; (require 'ispell)
-
-;; (add-to-list 'exec-path "/app/aspell/bin")
-;; (setq-default ispell-program-name "aspell")
-
-;; ;; For a case to check English text spells in .tex doc including Japanese texts as well
-;; (eval-after-load "ispell"
-;;   '(add-to-list 'ispell-skip-region-alist '("[^\000-\377]+")))
-
-;; ORG END   "oz20240202a"
-;; CHG START "oz20240202a"
 (with-eval-after-load 'ispell
  (add-to-list 'exec-path "/app/aspell/bin")
  (setq-default ispell-program-name "aspell")
@@ -779,7 +645,6 @@
  (eval-after-load "ispell"
    '(add-to-list 'ispell-skip-region-alist '("[^\000-\377]+")))
  )
-;; CHG END   "oz20240202a"
 
 ;; UNDER REVIEW START "impact for cpu load"
 ;; ;; flyspell automatic start
@@ -798,65 +663,7 @@
 ;;; @ flymake                                                       ;;;
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
 
-;; oz20240202a: Optimize emacs startup
-;; ORG START "oz20240202a"
-;; (require 'flymake)
-
-;; ;; Enable flymake for all files
-;; (add-hook 'find-file-hook 'flymake-find-file-hook)
-
-;; ;; Appearance
-;; (add-hook 'flymake-mode-hook
-;;           (lambda ()
-;;             (set-face-attribute 'flymake-errline nil
-;;                                 :underline "red"
-;;                                 :weight 'bold
-;;                                 :background nil)
-;;             (set-face-attribute 'flymake-warnline nil
-;;                                 :underline "yellow"
-;;                                 :weight 'bold
-;;                                 :background nil)
-;;             ))
-
-;; ;; Move to warning/error lines with M-p/M-n
-;; (global-set-key "\M-p" 'flymake-goto-prev-error)
-;; (global-set-key "\M-n" 'flymake-goto-next-error)
-
-;; ;; Display warning/error lines
-;; (global-set-key "\C-cd" 'flymake-display-err-menu-for-current-line)
-
-;; ;; Check function with Makefile
-;; (defun flymake-simple-generic-init (cmd &optional opts)
-;;   (let* ((temp-file  (flymake-init-create-temp-buffer-copy
-;;                       'flymake-create-temp-inplace))
-;;          (local-file (file-relative-name
-;;                       temp-file
-;;                       (file-name-directory buffer-file-name))))
-;;     (list cmd (append opts (list local-file)))))
-
-;; ;; Don't display warnings in GUI
-;; (setq flymake-gui-warnings-enabled nil)
-
-;; ;; Also apply syntax checks for header files
-;; (push '("\\.h\\'" flymake-simple-make-init flymake-master-cleanup)
-;;       flymake-allowed-file-name-masks)
-
-;; ;; UNDER REVIEW START
-;; ;; ;; Show error in minibuffer
-;; ;; (defun flymake-show-help ()
-;; ;;   (when (get-char-property (point) 'flymake-overlay)
-;; ;;     (let ((help (get-char-property (point) 'help-echo)))
-;; ;;       (if help (message "%s" help)))))
-;; ;; (add-hook 'post-command-hook 'flymake-show-help)
-;; ;; UNDER REVIEW END
-;; ORG END   "oz20240202a"
-;; CHG START "oz20240202a"
 (with-eval-after-load 'flymake
-;; oz20240205a: Add maintenance to flymake
-;; DEL START "oz20240205a"
-;;  ;; Enable flymake for all files
-;;  (add-hook 'find-file-hook 'flymake-find-file-hook)
-;; DEL END   "oz20240205a"
 
   ;; Appearance
   (add-hook 'flymake-mode-hook
@@ -878,17 +685,6 @@
   ;; Display warning/error lines
   (global-set-key "\C-cd" 'flymake-display-err-menu-for-current-line)
 
-;; DEL START "oz20240205a"
-;;  ;; Check function with Makefile
-;;  (defun flymake-simple-generic-init (cmd &optional opts)
-;;    (let* ((temp-file  (flymake-init-create-temp-buffer-copy
-;;                        'flymake-create-temp-inplace))
-;;           (local-file (file-relative-name
-;;                        temp-file
-;;                        (file-name-directory buffer-file-name))))
-;;      (list cmd (append opts (list local-file)))))
-;; DEL END   "oz20240205a"
-
   ;; Don't display warnings in GUI
   (setq flymake-gui-warnings-enabled t)
 
@@ -906,40 +702,14 @@
   ;; UNDER REVIEW END
 )
 
-;; oz20240328a: Enable flymake-mode manually
-;; CHG START "oz20240328a"
+;; Enable/Disable flymake-mode by hand
 (global-set-key (kbd "C-^") 'flymake-mode)
-;; CHG END   "oz02240328a"
-;; ORG START "oz20240328a"
-;; ORG START "oz20240205a"
-;; (add-hook 'c-mode-hook (lambda () (flymake-mode t)))
-;; ORG END   "oz20240205a"
-;; CHG START "oz20240205a"
-;; (add-hook 'c-mode-hook
-;;           (lambda()
-;;             (if (file-exists-p "Makefile")
-;;                 (flymake-mode t)
-;;               )
-;;             )
-;;           )
-;; CHG END   "oz20240205a"
-;; ORG END   "oz20240328a"
-
-;; CHG END   "oz20240202a"
 
 
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
 ;;; @ xcscope                                                       ;;;
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
 
-;; oz20240202a: Optimize emacs startup
-;; ORG START "oz20240202a"
-;; (require 'xcscope)
-;; (cscope-setup)
-;; (setq cscope-do-not-update-database t)
-;; ORG END   "oz20240202a"
-;; CHG START "oz20240202a"
-;; (setq cscope-program “gtags-cscope”)
 (autoload 'cscope-minor-mode "xcscope" nil t)
 (with-eval-after-load 'cscope
 
@@ -948,23 +718,6 @@
 )
 
 (add-hook 'c-mode-hook 'cscope-minor-mode)
-;; CHG END   "oz20240202a"
-
-
-;; oz20240204d: DELTE wgrep
-;; DEL START "oz20240204d"
-;; ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
-;; ;;; @ wgrep                                                         ;;;
-;; ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
-
-;; ;; Search by M-x grep.
-;; ;; Type 'r' in the grep result buffer to enter the edit mode.
-;; ;; Save by C-x C-s.
-;; ;; Exit without save by C-x C-k.
-
-;; (require 'wgrep)
-;; (setq wgrep-enable-key "r")
-;; DEL END
 
 
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
@@ -976,16 +729,6 @@
 ;; Type 'r' in the grep result buffer to eneter the edit mode.
 ;; Save by C-x C-s.
 ;; Exit without save by C-x C-k.
-
-;; oz20240202a: Optimize emacs startup
-;; ORG START "oz20240202a"
-;; (require 'color-moccur)
-;; (global-set-key (kbd "M-o") 'occur-by-moccur)
-;; (setq moccur-split-word t)
-;; (setq moccur-use-migemo t)
-;; (require 'moccur-edit)
-;; ORG END   "oz20240202a"
-;; CHG START "oz20240202a"
 
 ;; For color-moccur
 (global-set-key (kbd "M-o") 'occur-by-moccur)
@@ -1001,7 +744,6 @@
 ;; For moccur-edit
 (autoload 'moccur-edit-mode-in "moccur-edit" nil t)
 
-;; CHG END   "oz20240202a"
 
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
 ;;; @ autoinsert                                                    ;;;
@@ -1010,13 +752,7 @@
 (require 'autoinsert)
 
 ;; Location of template files
-;; oz20240204a: Fix template directory path
-;; ORG START "oz20240204a"
-;; (setq auto-insert-directory "~/.emacs.d/template")
-;; ORG END   "oz20240204a"
-;; CHG START "oz20240204a"
 (setq auto-insert-directory "~/template")
-;; CHG END   "oz20240204a"
 
 ;; Change template according to file
 (setq auto-insert-alist
@@ -1134,13 +870,7 @@
 ;;; @ c++-mode                                                      ;;;
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
 
-;; oz20240202a: Optimize emacs startup
-;; ORG START "oz20240202a"
-;; (require 'google-c-style)
-;; ORG END   "oz20240202a"
-;; CHG START "oz20240202a
 (autoload 'google-set-c-style "google-c-style" nil t)
-;; CHG END   "oz20240202a"
 (add-hook 'c-mode-common-hook 'google-set-c-style)
 
 ;;
@@ -1165,23 +895,16 @@
   (insert "\t")
   )
 
-;; Wrap longer line automatically
-;; oz20240123a: Turn off auto fill by default
-;; ORG START "oz20240123a"
-;; (setq text-mode-hook 'turn-on-auto-fill)
-;; ORG END   "oz20240123a"
-;; CHG START "oz20240123a"
+;; Wrap longer line automatically (disable by default)
 (setq text-mode-hook 'turn-off-auto-fill)
-;; CHG END   "oz20240123a"
 (add-hook 'text-mode-hook
           #'(lambda()
              (progn (set-fill-column 70)
                     (turn-on-auto-fill))))
 
-;; oz20240113b: Enable/Disable auto-fill-mode by hand
-;; ADD START "oz20240113b"
+;; Enable/Disable auto-fill-mode by hand
 (define-key global-map (kbd "C-;") 'auto-fill-mode)
-;; ADD END   "oz20240113b"
+
 
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
 ;;; @ emacs-lisp-mode                                               ;;;
@@ -1252,39 +975,8 @@
 ;;; @ org-mode                                                      ;;;
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
 
-;; oz20240204c: Delete obsolete codes on org-mode
-;; DEL START "oz20240204c"
-;; (add-to-list 'load-path "~/.emacs.d/site-lisp/org-mode")
-;; (add-to-list 'load-path "~/.emacs.d/site-lisp/org-mode/lisp")
-;; (add-to-list 'load-path "~/.emacs.d/site-lisp/org-mode/contrib/lisp")
-;; DEL END   "oz20240204c"
-
-;; oz20240202a: Optimize emacs startup
-;; ORG START "oz20240202a"
-;; (add-hook 'org-mode-hook 'howm-mode)
-;; (add-to-list 'auto-mode-alist '("\\.howm$" . org-mode))
-;; (add-to-list 'auto-mode-alist '("\\.txt$" . org-mode))
-;; (global-unset-key (kbd "C-x ,"))
-;; (setq howm-prefix (kbd "C-x ,"))
-;; (eval-after-load "howm-mode"
-;;   '(progn
-;;     (define-key howm-mode-map (kbd "C-c C-c") nil)))
-;; (setq howm-use-color nil)
-;; (setq org-startup-folded 'showall)
-;; ;; (setq org-indent-mode-turns-on-hiding-stars nil)
-;; ;; (setq org-indent-indentation-per-level 3)
-;; ;; (add-hook 'org-mode-hook 'turn-off-auto-fill)
-;; (setq org-src-fontify-natively t)
-;; (setq org-fontify-quote-and-verse-blocks t)
-;; ORG END   "oz20240202a"
-;; CHG START "oz20240202a"
 (autoload 'org-mode "org" nil t)
 (add-hook 'org-mode-hook 'howm-mode)
-;; oz20240204f: Put together auto-mode-alist to one place
-;; DEL START "oz20240204f"
-;; (add-to-list 'auto-mode-alist '("\\.howm$" . org-mode))
-;; (add-to-list 'auto-mode-alist '("\\.txt$" . org-mode))
-;; DEL END
 (with-eval-after-load 'org
   (setq org-startup-folded 'showall)
   (setq org-src-fontify-natively t)
@@ -1296,7 +988,6 @@
   ;; (add-hook 'org-mode-hook 'turn-off-auto-fill)
   ;; UNDER REVIEW END
 )
-;; CHG END   "oz20240202a"
 
 
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
@@ -1305,29 +996,14 @@
 
 (autoload 'markdown-mode "markdown-mode"
    "Major mode for editing Markdown files" t)
-;; oz20240114a: Add maintenance to markdown-mode
-;; DEL START "oz20240114a"
-;; (add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
-;; (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
-;; DEL END   "oz20240114a"
 
 (autoload 'gfm-mode "markdown-mode"
    "Major mode for editing GitHub Flavored Markdown files" t)
-;; ORG START "oz20240114a"
-;; (add-to-list 'auto-mode-alist '("README\\.md\\'" . gfm-mode))
-;; ORG END   "oz20240114a"
-;; CHG START "oz20240114a"
-;; oz20240204f: Put together auto-mode-alist to one place
-;; DEL START "oz20240204f"
+
 (add-to-list 'auto-mode-alist '("\\.md\\'" . gfm-mode))
-;; DEL END   "oz20240204f"
-;; CHG END   "oz20240114a"
 
 (add-hook 'markdown-mode-hook 'turn-off-auto-fill)
-;; ORG START "oz20240114a"
-;; (setq markdown-fontify-code-blocks-natively t)
-;; ORG END   "oz20240114a"
-;; CHG START "oz20240114a"
+
 (with-eval-after-load 'markdown-mode
   (setq pandoc-cmd (concat "pandoc -s -c " (getenv "MKDWCSS")))
   (custom-set-variables
@@ -1337,8 +1013,6 @@
    '(markdown-indent-on-enter 'indent-and-new-item))
   (define-key markdown-mode-map (kbd "<S-tab>") #'markdown-shifttab)
   )
-;; CHG END   "oz20240114a"
-
 
 ;; UNDER REVIEW START
 ;; ;; Tune header colors
@@ -1399,8 +1073,6 @@
 ;; UNDER REVIEW END
 
 
-;; oz20240407a: Tune shell script mode
-;; ADD START "oz20240407a"
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
 ;;; @ sh-mode                                                       ;;;
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
@@ -1409,7 +1081,6 @@
   (setq indent-tabs-mode nil))
 (add-hook 'sh-mode-hook #'turn-off-indent-tabs-mode)
 
-;; ADD END "oz20240407a"
 
 
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
@@ -1439,27 +1110,9 @@
 ;;; @ howm                                                          ;;;
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
 
-;; oz20240202a: Optimize emacs startup
-;; ORG START "oz20240202a"
-;; ;; (add-to-list 'load-path "~/.emacs.d/site-lisp/howm/")
-;; (setq howm-menu-lang 'ja)
-;; (global-set-key (kbd "C-x , ,") 'howm-menu)
-;; (autoload 'howm-menu "howm" "Hitori Otegaru Wiki Modoki" t)
-
-;; (setq howm-home-directory "~/howm/")
-;; (setq howm-keyword-file (concat howm-home-directory ".howm-keys"))
-;; (setq howm-history-file (concat howm-home-directory ".howm-history"))
-
-;; (setq howm-view-use-grep t)
-;; ORG END   "oz20240202a"
-;; CHG START "oz20240202a"
-;; oz20240305a: Fix a keybind to launch howm
-;; ADD START "oz20240305a"
 (global-unset-key (kbd "C-x ,"))
 (setq howm-prefix (kbd "C-x ,"))
-;; ADD END   "oz20240305a"
 (global-set-key (kbd "C-x ,,") 'howm-menu)
-
 (autoload 'howm-menu "howm" "Hitori Otegaru Wiki Modoki" t)
 (with-eval-after-load 'howm
   (setq howm-menu-lang 'ja)
@@ -1468,12 +1121,7 @@
   (setq howm-history-file (concat howm-home-directory ".howm-history"))
   (setq howm-view-use-grep t)
   (setq howm-use-color nil)
-;; DEL START "oz20240305a"
-;;  (global-unset-key (kbd "C-x ,"))
-;;  (setq howm-prefix (kbd "C-x ,"))
-;; DEL END   "oz20240305a"
 )
-;; CHG END   "oz20240202a"
 
 
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
@@ -1507,31 +1155,16 @@
 ;;; @ text-adjust                                                   ;;;
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
 
-;; oz20240202a: Optimize emacs startup
-;; ORG START "oz20240202a"
-;; (require 'text-adjust)
-
-;; ;; 「？！」や全角空白を半角へ変換しないようにしたい
-;; (setq text-adjust-hankaku-except "　？！＠ー〜、，。．")
-;; ORG END   "oz20240202a"
-;; CHG START "oz20240202a"
 (autoload 'text-adjust "text-adjust" nil t)
 (with-eval-after-load 'text-adjust
   ;; 「？！」や全角空白を半角へ変換しないようにしたい
   (setq text-adjust-hankaku-except "　？！＠ー〜、，。．")
 )
-;; CHG END   "oz20240202a"
 
 
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
 ;;; @ imenu-list                                                    ;;;
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
-
-;; oz20240202a: Optimize emacs startup
-;; imenu-list.el has defun imenu-list () with ;;;##autoload
-;; DEL START "oz20240202a"
-;; (require 'imenu-list)
-;; DEL END   "oz20240202a"
 
 (with-eval-after-load 'imenu-list
   (define-key imenu-list-major-mode-map (kbd "j") 'next-line)
@@ -1564,25 +1197,14 @@
 ;; (global-set-key (kbd "C-.") 'pc-bufsw-lru)
 
 
-;; oz20240113c: Add redo+
-;; ADD START "oz20240113c"
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
 ;;; @ redo                                                          ;;;
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
 
 (require 'redo+)
-;; oz20240207a: Change the keybind of redo
-;; ORG START "20240207a"
-;; (define-key global-map (kbd "C-z") 'redo)
-;; ORG END   "20240207a"
-;; CHG START "20240207a"
 (define-key global-map (kbd "C-?") 'redo)
-;; CHG END   "20240207a"
-;; ADD END   "oz20240113c"
 
 
-;; oz20240204e: Add grep-edit
-;; ADD START "oz20240204e"
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
 ;;; @ grep-edit                                                     ;;;
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
@@ -1600,18 +1222,14 @@
     )
 )
 
-;; ADD END   "oz20240204e"
 
-
-;; oz20240330a: Add restart-emacs
-;; ADD START "oz20240330a"
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
 ;;; @ restart-emacs                                                 ;;;
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
 
 (require 'restart-emacs)
 
-;; ADD END   "oz20240330a"
+
 
 
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
@@ -1682,12 +1300,6 @@
 ;; Sort buffers with names in Buffer-menu-mode
 (setq Buffer-menu-sort-column 4)
 
-;; oz20240113d: Delete useless codes
-;; DEL START "oz20240113d"
-;; ;; Allocate C-z to redo
-;; (global-set-key "\C-z" 'redo)
-;; DEL END   "oz20240113d"
-
 ;; ;; Dont' show the initial message of the scratch buffer
 ;; (setq initial-scratch-message nil)
 
@@ -1697,12 +1309,9 @@
 ;; Disable automatic indent
 (electric-indent-mode -1)
 
-;; DEL START "oz20240127b"
-;; ;; Apply garbage collection at reaching 256MB
-;; (setq gc-cons-threshold 268435456)
-;; DEL END   "oz20240127b"
-
 ;; Local Variables:
 ;; coding: utf-8
 ;; mode: emacs-lisp
 ;; End:
+
+;;; ends here
