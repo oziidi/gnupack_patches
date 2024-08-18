@@ -1239,6 +1239,17 @@
 (require 'restart-emacs)
 
 
+;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
+;;; @ isearch-mode                                                  ;;;
+;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
+
+(add-hook 'isearch-mode-hook
+            (function
+             (lambda ()
+               (define-key isearch-mode-map "\C-h" 'isearch-mode-help)
+               (define-key isearch-mode-map "\C-t" 'isearch-toggle-regexp)
+               (define-key isearch-mode-map "\C-c" 'isearch-toggle-case-fold)
+               (define-key isearch-mode-map "\C-j" 'isearch-edit-string))))
 
 
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
