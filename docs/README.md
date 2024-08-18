@@ -2,22 +2,19 @@
 
 GitHub branch: [https://github.com/oziidi/gnupack_patches](https://github.com/oziidi/gnupack_patches)
 
-Patches for gnupack-pretest_devel-2017.09.11.  
+Patches for gnupack-pretest_devel-2016.07.09.  
 gnupack allows Windows OS users to use cygwin and emacs in a ready-to-use manner.
 
 
 ## 使い方
 
-* gnupack-pretest_devel-2017.09.11.exeを下記からダウンロード  
+* gnupack-pretest_devel-2016.07.09.exeを下記からダウンロード  
   [gnupack - ダウンロードファイル一覧](https://ja.osdn.net/projects/gnupack/releases/)  
-  リンク先のウェブページで下記を探して「2017.09.11」をクリック  
+  リンク先のウェブページで「gnupack pretest」を探して「2016.07.09」をクリック  
 
-  > リリース時刻: 2017-09-11 19:26
-  > 2017.09.11 (4 個のファイル 表示)
+* gnupack-pretest_devel-2016.07.09.exeをダブルクリックすると展開先のディレクトリをきかれるのでgnupackを運用したい任意のディレクトリを入力
 
-* gnupack-pretest_devel-2017.09.11.exeをダブルクリックすると展開先のディレクトリをきかれるのでgnupackを運用したい任意のディレクトリを入力
-
-* gnupack-pretest_devel-2017.09.11を展開した同じディレクトリにこのgnupack_patches/を配置。  
+* gnupack-pretest_devel-2016.07.09を展開した同じディレクトリにこのgnupack_patches/を配置。  
   ディレクトリの名前を「gnupack_patches」を「gnupkack」に変更。  
   下記は(C:)ドライブ直下に配置した場合の例
 
@@ -26,13 +23,13 @@ gnupack allows Windows OS users to use cygwin and emacs in a ready-to-use manner
         | 
         |-- gnupack/
         |
-        |-- gnupack-pretest_devel-2017.09.11/
+        |-- gnupack-pretest_devel-2016.07.09/
         |
   ```
 
 * C:\gnupack\fetch_gnupack.batを実行。  
   ダブルクリック or cmd.exeからの実行どちらでも可。  
-  gnupack-pretest_devel-2017.09.11/から必要なファイルをgnupack/に取り込んでくれる。
+  gnupack-pretest_devel-2016.07.09/から必要なファイルをgnupack/に取り込んでくれる。
 
 * cygwinの取り込みは下記どちらかの方法で対応。
   1. C:\gnupack\fetch_gnupack.batの下記のコメントアウトを解除してフェッチを実行
