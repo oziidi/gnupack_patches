@@ -1082,6 +1082,12 @@
 (add-hook 'sh-mode-hook #'turn-off-indent-tabs-mode)
 
 
+;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
+;;; @ visual-basic-mode                                             ;;;
+;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
+
+(autoload 'vbnet-mode "vbnet-mode" "Mode for editing VB.NET code." t)
+
 
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
 ;;; @ auto-mode-alist                                               ;;;
@@ -1102,6 +1108,9 @@
          ("\\.ld$"   . ld-mode)
          ("\\.txt$"  . org-mode)
          ("\\.md$'"  . gfm-mode)
+         ("\\.vb$"   . vbnet-mode)
+         ("\\.vbs$"  . vbnet-mode)
+
          )
        auto-mode-alist))
 
